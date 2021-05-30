@@ -89,3 +89,22 @@ function OnExcClose(e) {
 }
 
 // Доп задание слайдер
+
+document.addEventListener('keydown', sliderPhoto);
+function sliderPhoto(el) {
+  let newIndex;
+  const currentId = photoEl.indexOf(boxlImage.src);
+  if (el.key === 'ArrowLeft') {
+    newIndex = currentId - 1;
+
+    if (newIndex === -1) {
+      newIndex = photoEl.length - 1;
+    }
+  } else if (el.key === 'ArrowRight') {
+    newIndex = currentId + 1;
+    if (currentId === photoEl.length) {
+      newIndex = 0;
+    }
+  }
+  boxlImage.src = photoEl[newIndex].original;
+}
