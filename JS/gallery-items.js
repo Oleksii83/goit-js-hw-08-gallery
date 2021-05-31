@@ -89,22 +89,25 @@ function OnExcClose(e) {
 }
 
 // Доп задание слайдер
+const imgArray = [];
 
-document.addEventListener('keydown', sliderPhoto);
-function sliderPhoto(el) {
+photoEl.forEach(ell => imgArray.push(ell.original));
+// console.log(imgArray.indexOf(boxlImage.src));
+
+document.addEventListener('keydown', e => {
   let newIndex;
-  const currentId = photoEl.indexOf(boxlImage.src);
-  if (el.key === 'ArrowLeft') {
-    newIndex = currentId - 1;
+  const currentId = imgArray.indexOf(boxlImage.src);
+  if (e.key === 'ArrowLeft') {
+    newIndex = imgArray - 1;
 
     if (newIndex === -1) {
-      newIndex = photoEl.length - 1;
+      newIndex = imgArray.length - 1;
     }
-  } else if (el.key === 'ArrowRight') {
+  } else if (e.key === 'ArrowRight') {
     newIndex = currentId + 1;
-    if (currentId === photoEl.length) {
+    if (newIndex === imgArray.length) {
       newIndex = 0;
     }
   }
-  boxlImage.src = photoEl[newIndex].original;
-}
+  boxlImage.src = imgArray[newIndex];
+});
